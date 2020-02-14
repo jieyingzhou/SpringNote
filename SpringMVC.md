@@ -257,30 +257,30 @@ int studentId = 1;
 *Delete*
 ``java
 // start a transaction
-			session.beginTransaction();
-			
-			// get instructor by primary key /id
-			int theId = 1;
-			Instructor tempInstructor = session.get(Instructor.class, theId);
-			
-			System.out.println("Found instructor: " + tempInstructor);
-			
-			// delete the instructors
-			if (tempInstructor != null) {
-				
-				System.out.println("Deleting: " + tempInstructor);
-				
-				// Note: will ALSO delete accociated "details" object
-				// because of CascadeType.ALL
-				//
-				session.delete(tempInstructor);
-			}
-			
-			
-			// commit transaction
-			session.getTransaction().commit();
-			
-			System.out.println("Done!");
+session.beginTransaction();
+
+// get instructor by primary key /id
+int theId = 1;
+Instructor tempInstructor = session.get(Instructor.class, theId);
+
+System.out.println("Found instructor: " + tempInstructor);
+
+// delete the instructors
+if (tempInstructor != null) {
+
+	System.out.println("Deleting: " + tempInstructor);
+
+	// Note: will ALSO delete accociated "details" object
+	// because of CascadeType.ALL
+	//
+	session.delete(tempInstructor);
+}
+
+
+// commit transaction
+session.getTransaction().commit();
+
+System.out.println("Done!");
 ```
 
 # One-to-One - Bi
@@ -360,75 +360,75 @@ int studentId = 1;
 
 ```java
 // start a transaction
-			session.beginTransaction();
-			
-			// get the instructor detail object
-			int theId = 2;
-			InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
-			
-			// print the instructor detail
-			System.out.println("tempInstructorDetail: " + tempInstructorDetail);
-			
-			// print the associated instructor
-			System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
-			
-			// commit transaction
-			session.getTransaction().commit();
-			
-			System.out.println("Done!”);
+session.beginTransaction();
+
+// get the instructor detail object
+int theId = 2;
+InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
+
+// print the instructor detail
+System.out.println("tempInstructorDetail: " + tempInstructorDetail);
+
+// print the associated instructor
+System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
+
+// commit transaction
+session.getTransaction().commit();
+
+System.out.println("Done!”);
 ```
 
 *Delete*
 ```java
 // start a transaction
-			session.beginTransaction();
-			
-			// get instructor by primary key /id
-			int theId = 2;
-			InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
-			
-			System.out.println("tempInstructorDetail: " + tempInstructorDetail);
-			
-			System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
-			
-			// delete the instructor detail
-			System.out.println("Deleting tempInstructorDetail:" + tempInstructorDetail);
-			session.delete(tempInstructorDetail);
-			
-			
-			// commit transaction
-			session.getTransaction().commit();
-			
-			System.out.println("Done!”);
+session.beginTransaction();
+
+// get instructor by primary key /id
+int theId = 2;
+InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
+
+System.out.println("tempInstructorDetail: " + tempInstructorDetail);
+
+System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
+
+// delete the instructor detail
+System.out.println("Deleting tempInstructorDetail:" + tempInstructorDetail);
+session.delete(tempInstructorDetail);
+
+
+// commit transaction
+session.getTransaction().commit();
+
+System.out.println("Done!”);
 ```
 
 *Only delete InstructDetail*
 ```java
 // start a transaction
-			session.beginTransaction();
-			
-			// get instructor by primary key /id
-			int theId = 3;
-			InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
-			
-			System.out.println("tempInstructorDetail: " + tempInstructorDetail);
-			
-			System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
-			
-			// delete the instructor detail
-			System.out.println("Deleting tempInstructorDetail:" + tempInstructorDetail);
-			
-			// remove the associated object reference
-			// break bi-directional link
-			tempInstructorDetail.getInstructor().setInstructorDetail(null);
-			
-			session.delete(tempInstructorDetail);
-			
-			
-			// commit transaction
-			session.getTransaction().commit();
-			
-			System.out.println("Done!”);
+session.beginTransaction();
+
+// get instructor by primary key /id
+int theId = 3;
+InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
+
+System.out.println("tempInstructorDetail: " + tempInstructorDetail);
+
+System.out.println("the associated instructor: " + tempInstructorDetail.getInstructor());
+
+// delete the instructor detail
+System.out.println("Deleting tempInstructorDetail:" + tempInstructorDetail);
+
+// remove the associated object reference
+// break bi-directional link
+tempInstructorDetail.getInstructor().setInstructorDetail(null);
+
+session.delete(tempInstructorDetail);
+
+
+// commit transaction
+session.getTransaction().commit();
+
+System.out.println("Done!”);
 ```
 
 # One to Many-Bi
