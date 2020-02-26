@@ -293,3 +293,75 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
 ```
 
 
+# Spring Data JPA in Spring Boot
+
+Various DAO Techniques
+
+Version 1: Use EntityManager but leverage native Hibernate API
+Version 2: Use EntityManager and standard JPA API
+Version 3: Spring Data JPA
+
+# The problem
+
+To create a DAO for Employee: create EmployeeDAO, EmployeeDAO Implimentation,
+
+```java
+package com.luv2code.springboot.cruddemo.dao;
+
+import java.util.List;
+
+import com.luv2code.springboot.cruddemo.entity.Employee;
+
+public interface EmployeeDAO {
+
+	public List<Employee> findAll();
+	
+	public Employee findById(int theId);
+	
+	public void save(Employee theEmployee);
+	
+	public void deleteById(int theId);
+	
+		
+}
+```
+* What if we need to create a DAO for another entity?
+  * Customer, Student, Product, Book…
+* Do we have to repeat all of the same code again?
+
+# Spring Data JPA - Solution
+
+* Spring Data JPA is the solution!
+* Create a DAP and just plug in your entity type and primary key
+* Spring will give you a CRUD implementation for FREE
+  * Helps to minimize boiler-plate DAO code
+
+# JpaRepository
+* Spring Data JPA provides the interface: JpaRepository
+* Exposes methods (some by inheritance from parents)
+
+*Step by Step*
+1. Extend JpaRepository interface
+2. Use your Repository in your app (No need for implementation class)
+
+```java
+package com.luv2code.springboot.cruddemo.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.luv2code.springboot.cruddemo.entity.Employee;
+
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+
+}
+```
+
+# Advanced Features
+* Advanced features available for
+  * Extending and adding custom queries with JPQL
+  * Query Domain Specific Language(Query DSL)
+  * Defining custom methods(low-level coding)
+
+
+
+
